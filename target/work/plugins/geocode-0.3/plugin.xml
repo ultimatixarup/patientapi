@@ -1,0 +1,11 @@
+<plugin name='geocode' version='0.3' grailsVersion='2.0 &gt; *'>
+  <author>Donal Murtagh</author>
+  <title>Geocode Plugin</title>
+  <description>Uses the Google maps web service to perform address geocoding and reverse geocoding
+</description>
+  <documentation>https://github.com/domurtag/grails-geocode</documentation>
+  <type>GeocodeGrailsPlugin</type>
+  <resources>
+    <resource>grails.plugin.geocode.GeocodingService</resource>
+  </resources>
+</plugin>
