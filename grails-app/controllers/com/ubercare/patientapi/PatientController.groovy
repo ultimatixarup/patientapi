@@ -37,4 +37,28 @@ class PatientController extends RestfulController {
 		}
 		render resMap as JSON
 	}
+	
+	def getPatientDetails(){
+		println "here1"
+		
+		println request.JSON
+	
+		def resMap = [:]
+		try {
+			def patientID = request.JSON.patientID
+			
+			
+			
+	
+			//patientInfoService.updatePatientHospitalInfo(patientID, url, name)
+			
+			resMap = patientInfoService.listPatientHospitalInfo(patientID)
+			
+			
+		} catch(Exception e) {
+			resMap = ["status":"failure", "message":e.message]
+		}
+		render resMap as JSON
+		
+	}
 }
