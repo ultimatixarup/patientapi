@@ -1,11 +1,15 @@
 package com.ubercare.patientapi
 
+import java.util.Date;
+
 import grails.converters.JSON
 import grails.rest.RestfulController
 
 class PatientController extends RestfulController {
 	
 	def patientInfoService
+	
+	def patientEMRService
 	
 	static responseFormats = ['json', 'xml']
 
@@ -61,4 +65,52 @@ class PatientController extends RestfulController {
 		render resMap as JSON
 		
 	}
+	
+	
+	
+	
+	/**
+	 * Returns all EMR access codes
+	 * @return
+	 */
+	
+	def getAllEMRAccessREasonCodes(){
+		def resMap = [:]
+		resMap = patientEMRService.listEMRAccessReasonCodes();
+		render resMap as JSON;
+		
+	}
+	
+	def addEMRAccessReasonCode(){
+		def resMap = [:]
+		String reasonCode = request.JSON.reasonCode;
+		resMap = patientEMRService.addEMRAccessReasonCode(reasonCode);
+		render resMap as JSON;
+		
+	}
+	
+	
+	def addEMRAccessAudit(){
+		def resMap = [:]
+		Long patientID = request.JSON.patientID
+		Long userID = request.JSON.userID
+		String reasonCode = request.JSON.reasonCode
+		String deviceId = request.JSON.deviceId
+		
+		resMap = patientEMRServicec.addEMRAccessAudit(patientID,userID,reasonCode,deviceId)
+		
+	    
+		
+		render resMap as JSON;
+	}
+	
+	def getEMRAccessAudit(){
+		def responseMap = [:]
+		Long patientID = request.JSON.patientID
+		responseMap = patientEMRService.getEMRAccessReason(patientID)
+		render responseMap as JSON
+		
+	}
+	
+	
 }
